@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.coderslab.springCMS;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ public class Article {
     @Column(length = 200)
     private String title;
     @ManyToOne
-    private Author author;
+    private Categor author;
     @OneToMany
     private List<Category> categories;
     private String content;

@@ -2,25 +2,26 @@ package pl.coderslab.springCMS;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
 @Transactional
-public class AuthorDao {
+public class ArticleDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void save(Categor author){
-        entityManager.persist(author);
+    public void save(Article article){
+        entityManager.persist(article);
     }
 
-    public void update(Categor author){
-        entityManager.merge(author);
+    public void update(Article article){
+        entityManager.merge(article);
     }
 
-    public void delete(Categor author){
-        entityManager.remove(entityManager.contains(author) ?
-                author : entityManager.merge(author));
+    public void delete(Article article){
+        entityManager.remove(entityManager.contains(article) ?
+                article : entityManager.merge(article));
     }
 }

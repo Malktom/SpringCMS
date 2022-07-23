@@ -10,6 +10,6 @@ public class HomeController {
     @ResponseBody
 
     public String start() {
-        return "start";
+        return "Spring CMS";
     }
 }

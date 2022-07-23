@@ -40,7 +40,7 @@ public class AppConfig implements WebMvcConfigurer {
     public LocalEntityManagerFactoryBean entityManagerFactory() {
         LocalEntityManagerFactoryBean entityManagerFactoryBean
                 = new LocalEntityManagerFactoryBean();
-        entityManagerFactoryBean.setPersistenceUnitName("dwarfPersistenceUnit");
+        entityManagerFactoryBean.setPersistenceUnitName("springCMSPersistenceUnit");
         return entityManagerFactoryBean;
     }
     @Bean
