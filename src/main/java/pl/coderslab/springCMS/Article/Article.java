@@ -2,6 +2,7 @@ package pl.coderslab.springCMS.Article;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.coderslab.springCMS.Author.Author;
 import pl.coderslab.springCMS.Category.Category;
 
 import javax.persistence.*;
@@ -17,8 +18,8 @@ public class Article {
     private Long id;
     @Column(length = 200)
     private String title;
-    @ManyToOne
-    private Category author;
+   @ManyToOne
+    private Author author;
     @OneToMany
     private List<Category> categories;
     private String content;

@@ -16,4 +16,9 @@ public class Category {
     private String name;
     @Column(nullable = true)
     private String description;
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

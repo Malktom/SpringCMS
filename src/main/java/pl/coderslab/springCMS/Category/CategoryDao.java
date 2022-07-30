@@ -17,6 +17,9 @@ public class CategoryDao {
         return entityManager.createQuery("select d from Category d ").getResultList();
 
     }
+    public List<String> getCategoryNames() {
+        return entityManager.createQuery("select d.name from Category d").getResultList();
+    }
     public void save(Category category){
         entityManager.persist(category);
     }
