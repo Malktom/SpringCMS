@@ -14,10 +14,9 @@ import java.util.List;
 @Controller
 @RequestMapping("article")
 public class ArticleController {
- private ArticleDao articleDao;
- private CategoryDao categoryDao;
- private AuthorDao authorDao;
-
+    private ArticleDao articleDao;
+    private CategoryDao categoryDao;
+    private AuthorDao authorDao;
 
 
     public ArticleController(ArticleDao articleDao, CategoryDao categoryDao, AuthorDao authorDao) {
@@ -27,21 +26,26 @@ public class ArticleController {
     }
 
     @GetMapping("list")
-    public String getList (Model model) {
+    public String getList(Model model) {
         model.addAttribute("articles", articleDao.findAll());
         return "articlesList";
 
     }
+
     @GetMapping("add")
     public String add(Model model) {
         model.addAttribute("article", new Article());
+        model.addAttribute("authors", authorDao.findAll());
+        model.addAttribute("categories", categoryDao.findAll());
         return "addArticle";
     }
+
     @PostMapping("add")
     public String save(Article article) {
         articleDao.save(article);
         return "redirect:/article/list";
     }
+
     @RequestMapping("/delete/{id}")
     public String deletePerson(@PathVariable Long id) {
         Article byId = articleDao.findById(id);
@@ -49,16 +53,16 @@ public class ArticleController {
         return "redirect:/article/list";
     }
 
-    @ModelAttribute("authors")   // sprawdzic jaki jest w widoku .jsp
-    public List<String> authors() {
-        return authorDao.getAuthorNames();
-
-
-    }
-    @ModelAttribute("categories")   // sprawdzic jaki jest w widoku .jsp
-    public List<String> categories() {
-       return categoryDao.getCategoryNames();
-
-
-    }
+//    @ModelAttribute("authors")   // sprawdzic jaki jest w widoku .jsp
+//    public List<String> authors() {
+//        return authorDao.getAuthorNames();
+//
+//
+//    }
+//    @ModelAttribute("categories")   // sprawdzic jaki jest w widoku .jsp
+//    public List<String> categories() {
+//       return categoryDao.getCategoryNames();
+//
+//
+//    }
 }

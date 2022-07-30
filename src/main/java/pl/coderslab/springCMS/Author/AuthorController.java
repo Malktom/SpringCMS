@@ -19,7 +19,7 @@ public class AuthorController {
     }
 
     @GetMapping("list")
-    public String getList (Model model) {
+    public String getList(Model model) {
         model.addAttribute("authors", authorDao.findAll());
         return "authorsList";
 
@@ -31,11 +31,13 @@ public class AuthorController {
         model.addAttribute("author", new Author());
         return "addAuthor";
     }
+
     @PostMapping("add")
     public String save(Author author) {
         authorDao.save(author);
         return "redirect:/author/list";
     }
+
     @RequestMapping("/delete/{id}")
     public String deletePerson(@PathVariable Long id) {
         Author byId = authorDao.findById(id);
@@ -50,6 +52,7 @@ public class AuthorController {
         return "addAuthor";
 
     }
+
     @PostMapping("/edit/{id}")   // {id}?????
     public String edit(Author author) {
         authorDao.update(author);

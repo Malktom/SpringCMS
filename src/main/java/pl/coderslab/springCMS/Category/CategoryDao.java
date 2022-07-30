@@ -17,22 +17,25 @@ public class CategoryDao {
         return entityManager.createQuery("select d from Category d ").getResultList();
 
     }
+
     public List<String> getCategoryNames() {
         return entityManager.createQuery("select d.name from Category d").getResultList();
     }
-    public void save(Category category){
+
+    public void save(Category category) {
         entityManager.persist(category);
     }
 
-    public void update(Category category){
+    public void update(Category category) {
         entityManager.merge(category);
     }
 
-    public void delete(Category category){
+    public void delete(Category category) {
         entityManager.remove(entityManager.contains(category) ?
                 category : entityManager.merge(category));
     }
-    public Category findById(Long id){
-        return  entityManager.find(Category.class,id);
+
+    public Category findById(Long id) {
+        return entityManager.find(Category.class, id);
     }
 }

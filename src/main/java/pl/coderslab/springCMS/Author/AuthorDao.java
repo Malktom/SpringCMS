@@ -19,20 +19,21 @@ public class AuthorDao {
 
     }
 
-    public void save(Author author){
+    public void save(Author author) {
         entityManager.persist(author);
     }
 
-    public void update(Author author){
+    public void update(Author author) {
         entityManager.merge(author);
     }
 
-    public void delete(Author author){
+    public void delete(Author author) {
         entityManager.remove(entityManager.contains(author) ?
                 author : entityManager.merge(author));
     }
-    public Author findById(Long id){
-        return  entityManager.find(Author.class,id);
+
+    public Author findById(Long id) {
+        return entityManager.find(Author.class, id);
     }
 
     public List<String> getAuthorNames() {

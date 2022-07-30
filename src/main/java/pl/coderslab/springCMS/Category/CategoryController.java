@@ -18,7 +18,7 @@ public class CategoryController {
     }
 
     @GetMapping("list")
-    public String getList(Model model){
+    public String getList(Model model) {
         model.addAttribute("categories", categoryDao.findAll());
         return "categoriesList";
     }
@@ -28,11 +28,13 @@ public class CategoryController {
         model.addAttribute("category", new Category());
         return "addCategory";
     }
+
     @PostMapping("add")
     public String save(Category category) {
         categoryDao.save(category);
         return "redirect:/category/list";
     }
+
     @RequestMapping("/delete/{id}")
 
     public String deletePerson(@PathVariable Long id) {
@@ -48,6 +50,7 @@ public class CategoryController {
         return "addCategory";
 
     }
+
     @PostMapping("/edit/{id}")   // {id}?????
     public String edit(Category category) {
         categoryDao.update(category);

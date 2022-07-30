@@ -19,23 +19,25 @@ public class ArticleDao {
 
     }
 
-    public List<Article> get5LatestArticles(){
+    public List<Article> get5LatestArticles() {
 
         return entityManager.createQuery("SELECT b FROM Article b ORDER BY b.created DESC ").setMaxResults(5).getResultList();
     }
-    public void save(Article article){
+
+    public void save(Article article) {
         entityManager.persist(article);
     }
 
-    public void update(Article article){
+    public void update(Article article) {
         entityManager.merge(article);
     }
 
-    public void delete(Article article){
+    public void delete(Article article) {
         entityManager.remove(entityManager.contains(article) ?
                 article : entityManager.merge(article));
     }
-    public Article findById(Long id){
-        return  entityManager.find(Article.class,id);
+
+    public Article findById(Long id) {
+        return entityManager.find(Article.class, id);
     }
 }

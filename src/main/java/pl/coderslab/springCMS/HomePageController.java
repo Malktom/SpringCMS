@@ -24,6 +24,6 @@ public class HomePageController {
     @GetMapping("/list")
     public String get5LatestArticles(Model model) {
         model.addAttribute("articles", articleDao.get5LatestArticles());
-       return "homePageArticles";
+        return "homePageArticles";
     }
 }

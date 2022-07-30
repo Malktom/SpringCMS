@@ -11,9 +11,10 @@
     title:
     <form:input path="title"/>
     author:
-    <form:select path="author" items="${authors}"/>
+<%--    jak dodac nazwisko do selecta--%>
+    <form:select itemValue="id" itemLabel="lastName" path="author.id" items="${authors}"/>
     categories
-    <form:select path="categories" items="${categories}"/>
+    <form:checkboxes itemValue="id" itemLabel="name" path="category.id" items="${categories}"/>
     content:
     <form:input path="content"/>
 
