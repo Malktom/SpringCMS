@@ -1,7 +1,8 @@
-package pl.coderslab.springCMS;
+package pl.coderslab.springCMS.Article;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.coderslab.springCMS.Category.Category;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,5 +32,12 @@ public class Article {
     @PreUpdate
     public void preUpdate(){
         updated=LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return this.title+" "+
+                this.author+ " "+
+                this.created;
     }
 }

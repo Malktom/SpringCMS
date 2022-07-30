@@ -1,4 +1,4 @@
-package pl.coderslab.springCMS;
+package pl.coderslab.springCMS.Author;
 
 import lombok.Getter;
 import lombok.Setter;
