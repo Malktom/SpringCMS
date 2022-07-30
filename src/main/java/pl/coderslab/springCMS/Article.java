@@ -17,7 +17,7 @@ public class Article {
     @Column(length = 200)
     private String title;
     @ManyToOne
-    private Categor author;
+    private Category author;
     @OneToMany
     private List<Category> categories;
     private String content;
