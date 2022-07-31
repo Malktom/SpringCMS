@@ -4,9 +4,25 @@
 <head>
     <title>Title</title>
 </head>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid grey;
+    }
+    th, td {
+        text-align: center;
+        padding: 6px;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
 <body>
 <a href="<c:url value="/category/add"/>">add category</a>
-
+<a href="<c:url value="/article/list"/>">article list</a>
+<a href="<c:url value="/author/list"/>">author list</a>
 <table>
     <tr>
         <th>id</th>
@@ -21,7 +37,7 @@
             <td>${category.description}</td>
 
             <td>
-                <a href="<c:url value="/category/delete/${category.id}"/>">usuń</a>
+                <a href="<c:url value="/category/delete/${category.id}"/>">delete</a>
                 <a href="<c:url value="/category/edit/${category.id}"/>">edit</a>
             </td>
         </tr>

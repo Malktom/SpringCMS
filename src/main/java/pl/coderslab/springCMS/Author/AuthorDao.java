@@ -2,6 +2,7 @@ package pl.coderslab.springCMS.Author;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import pl.coderslab.springCMS.Category.Category;
 
 import javax.persistence.EntityManager;

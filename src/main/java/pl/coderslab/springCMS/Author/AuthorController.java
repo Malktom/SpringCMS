@@ -2,10 +2,7 @@ package pl.coderslab.springCMS.Author;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.springCMS.Category.Category;
 
 @Controller
@@ -33,7 +30,7 @@ public class AuthorController {
     }
 
     @PostMapping("add")
-    public String save(Author author) {
+    public String save(@RequestBody Author author) {
         authorDao.save(author);
         return "redirect:/author/list";
     }
