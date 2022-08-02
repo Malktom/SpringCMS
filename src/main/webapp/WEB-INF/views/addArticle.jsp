@@ -1,5 +1,6 @@
 <%@ taglib prefix="form"
            uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,8 +14,9 @@
     author:
 <%--    jak dodac nazwisko do selecta--%>
     <form:select itemValue="id" itemLabel="lastName" path="author.id" items="${authors}"/>
-    categories
-<%--    <form:checkboxes itemValue="id" itemLabel="name" path="category.id" items="${categories}"/>--%>
+    categories:
+    <form:select itemValue="id" itemLabel="name" path="categories" items="${categories}" multiple="true"/>
+
     content:
     <form:input path="content"/>
 

@@ -24,3 +24,10 @@ public class Author {
         return this.firstName + " " + this.lastName;
     }
 }
+
+
+//json
+//{
+//        "firstName":"James",
+//        "lastName":"Bond"
+//        }

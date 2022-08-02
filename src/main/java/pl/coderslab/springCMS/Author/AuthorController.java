@@ -30,7 +30,7 @@ public class AuthorController {
     }
 
     @PostMapping("add")
-    public String save( Author author) { // dodac @RequestBody dla JSON
+    public String save(Author author) { // dodac @RequestBody dla JSON
         authorDao.save(author);
         return "redirect:/author/list";
     }

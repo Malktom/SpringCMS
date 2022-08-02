@@ -20,7 +20,7 @@ public class Article {
     private String title;
    @ManyToOne
     private Author author;
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories;
     private String content;
     private LocalDateTime created;

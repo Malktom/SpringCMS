@@ -7,7 +7,7 @@
 <style>
     table {
         border-collapse: collapse;
-        width: 100%;
+        /*width: 100%;*/
     }
     th, td {
         text-align: left;

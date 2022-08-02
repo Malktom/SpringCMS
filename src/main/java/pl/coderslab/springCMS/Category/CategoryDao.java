@@ -14,7 +14,7 @@ public class CategoryDao {
     private EntityManager entityManager;
 
     public List<Category> findAll() {
-        return entityManager.createQuery("select d from Category d ").getResultList();
+        return entityManager.createQuery("select d from Category d").getResultList();
 
     }
 
