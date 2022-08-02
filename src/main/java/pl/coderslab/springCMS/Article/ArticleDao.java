@@ -33,8 +33,7 @@ public class ArticleDao {
     }
 
     public void delete(Article article) {
-        entityManager.remove(entityManager.contains(article) ?
-                article : entityManager.merge(article));
+        entityManager.remove(entityManager.contains(article) ? article : entityManager.merge(article));
     }
 
     public Article findById(Long id) {

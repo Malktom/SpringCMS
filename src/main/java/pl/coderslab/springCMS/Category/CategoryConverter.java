@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
 
-    public class CategoryConverter implements Converter<String, Category> {
+public class CategoryConverter implements Converter<String, Category> {
 
     @Autowired
     private CategoryDao categoryDao;

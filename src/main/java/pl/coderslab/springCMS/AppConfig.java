@@ -45,16 +45,19 @@ public class AppConfig implements WebMvcConfigurer {
         entityManagerFactoryBean.setPersistenceUnitName("springCMSPersistenceUnit");
         return entityManagerFactoryBean;
     }
+
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager jpaTransactionManager =
                 new JpaTransactionManager(entityManagerFactory);
         return jpaTransactionManager;
     }
+
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(getCategoryConverter());
     }
+
     @Bean
     public CategoryConverter getCategoryConverter() {
         return new CategoryConverter();

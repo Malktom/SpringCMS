@@ -39,7 +39,7 @@
             <td>${article.id}</td>
             <td>${article.title}</td>
             <td>${article.author}</td>
-<%--            <td>${article.categories}</td>--%>
+            <td>${article.categories}</td>
             <td>${article.content}</td>
             <td>${article.created}</td>
             <td>${article.updated}</td>

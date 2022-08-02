@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.springCMS.Author.Author;
 import pl.coderslab.springCMS.Author.AuthorDao;
+import pl.coderslab.springCMS.Category.Category;
 import pl.coderslab.springCMS.Category.CategoryDao;
 
 import java.util.Arrays;
@@ -35,8 +36,8 @@ public class ArticleController {
     @GetMapping("add")
     public String add(Model model) {
         model.addAttribute("article", new Article());
-        model.addAttribute("authors", authorDao.findAll());
-        model.addAttribute("categories", categoryDao.findAll());
+//        model.addAttribute("authors", authorDao.findAll());
+//        model.addAttribute("categories", categoryDao.findAll());
         return "addArticle";
     }
 
@@ -47,22 +48,37 @@ public class ArticleController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deletePerson(@PathVariable Long id) {
+    public String delete(@PathVariable Long id) {
         Article byId = articleDao.findById(id);
         articleDao.delete(byId);
         return "redirect:/article/list";
     }
 
-//    @ModelAttribute("authors")   // sprawdzic jaki jest w widoku .jsp
-//    public List<String> authors() {
-//        return authorDao.getAuthorNames();
-//
-//
-//    }
-//    @ModelAttribute("categories")   // sprawdzic jaki jest w widoku .jsp
-//    public List<String> categories() {
-//       return categoryDao.getCategoryNames();
-//
-//
-//    }
+    @GetMapping("/edit/{id}")
+    public String update(@PathVariable Long id, Model model) {
+        Article byId = articleDao.findById(id);
+        model.addAttribute("article", byId);
+        return "addArticle";
+
+    }
+
+    @PostMapping("/edit/{id}")
+    public String edit(Article article) {
+        articleDao.update(article);
+        return "redirect:/article/list";
+    }
+
+
+    @ModelAttribute("authors")
+    public List<Author> authors() {
+        return authorDao.findAll();
+
+    }
+
+    @ModelAttribute("categories")
+    public List<Category> categories() {
+        return categoryDao.findAll();
+
+
+    }
 }

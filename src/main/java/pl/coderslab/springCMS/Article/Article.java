@@ -18,7 +18,7 @@ public class Article {
     private Long id;
     @Column(length = 200)
     private String title;
-   @ManyToOne
+    @ManyToOne
     private Author author;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories;
@@ -27,18 +27,19 @@ public class Article {
     private LocalDateTime updated;
 
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         created = LocalDateTime.now();
     }
+
     @PreUpdate
-    public void preUpdate(){
-        updated=LocalDateTime.now();
+    public void preUpdate() {
+        updated = LocalDateTime.now();
     }
 
     @Override
     public String toString() {
-        return this.title+" "+
-                this.author+ " "+
+        return this.title + " " +
+                this.author + " " +
                 this.created;
     }
 }
