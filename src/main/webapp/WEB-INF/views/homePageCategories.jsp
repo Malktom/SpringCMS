@@ -35,12 +35,10 @@
     </tr>
     <c:forEach items="${categoriesList}" var="cat">
         <tr>
-            <td>${cat.name}</td>
-            <td>${cat.description}</td>
-            <td>
-                <a href="<c:url value="/article/${cat.name}"/>">show Articles</a>
 
-            </td>
+            <td><a href="<c:url value="/article/${cat.name}"/>"> ${cat.name}</a></td>
+            <td>${cat.description}</td>
+
 
         </tr>
 
