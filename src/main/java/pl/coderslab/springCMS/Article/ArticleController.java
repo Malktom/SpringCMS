@@ -1,8 +1,6 @@
 package pl.coderslab.springCMS.Article;
 
 
-import org.hibernate.Hibernate;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -12,9 +10,9 @@ import pl.coderslab.springCMS.Author.Author;
 import pl.coderslab.springCMS.Author.AuthorDao;
 import pl.coderslab.springCMS.Category.Category;
 import pl.coderslab.springCMS.Category.CategoryDao;
+import pl.coderslab.springCMS.repository.ArticleRepository;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -24,12 +22,14 @@ public class ArticleController {
     private CategoryDao categoryDao;
     private AuthorDao authorDao;
 
+    private ArticleRepository articleRepository;
 
-    public ArticleController(ArticleDao articleDao, CategoryDao categoryDao, AuthorDao authorDao) {
+
+    public ArticleController(ArticleDao articleDao, CategoryDao categoryDao, AuthorDao authorDao, ArticleRepository articleRepository) {
         this.articleDao = articleDao;
         this.categoryDao = categoryDao;
         this.authorDao = authorDao;
-
+        this.articleRepository = articleRepository;
     }
 
     @Transactional
@@ -93,6 +93,11 @@ public class ArticleController {
     public List<Category> categories() {
         return categoryDao.findAll();
 
+    }
 
+    @GetMapping("/{categoryName}")
+    public String showArticleByCategory(@PathVariable String categoryName, Model model) {
+        model.addAttribute("articlesByCategory",articleRepository.findAllByCategoriesName(categoryName));
+        return "articlesListByCategory";
     }
 }

@@ -2,12 +2,11 @@ package pl.coderslab.springCMS.Author;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import pl.coderslab.springCMS.Category.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -28,7 +27,7 @@ public class AuthorDao {
         entityManager.merge(author);
     }
 
-    public void delete(Author author) {
+    public void delete(Optional<Author> author) {
         entityManager.remove(entityManager.contains(author) ?
                 author : entityManager.merge(author));
     }
