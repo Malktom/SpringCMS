@@ -11,31 +11,32 @@ import pl.coderslab.springCMS.Author.AuthorDao;
 import pl.coderslab.springCMS.Category.Category;
 import pl.coderslab.springCMS.Category.CategoryDao;
 import pl.coderslab.springCMS.repository.ArticleRepository;
+import pl.coderslab.springCMS.repository.AuthorRepository;
+import pl.coderslab.springCMS.repository.CategoryRepository;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("article")
 public class ArticleController {
-    private ArticleDao articleDao;
-    private CategoryDao categoryDao;
-    private AuthorDao authorDao;
 
     private ArticleRepository articleRepository;
+    private AuthorRepository authorRepository;
+    private CategoryRepository categoryRepository;
 
+    public ArticleController(ArticleDao articleDao, CategoryDao categoryDao, AuthorDao authorDao, ArticleRepository articleRepository, AuthorRepository authorRepository, CategoryRepository categoryRepository) {
 
-    public ArticleController(ArticleDao articleDao, CategoryDao categoryDao, AuthorDao authorDao, ArticleRepository articleRepository) {
-        this.articleDao = articleDao;
-        this.categoryDao = categoryDao;
-        this.authorDao = authorDao;
         this.articleRepository = articleRepository;
+        this.authorRepository = authorRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Transactional
     @GetMapping("list")
     public String getList(Model model) {
-        List<Article> all = articleDao.findAll();
+        List<Article> all = articleRepository.findAll();
         model.addAttribute("articles", all);
 
         return "articlesList";
@@ -45,8 +46,6 @@ public class ArticleController {
     @GetMapping("add")
     public String add(Model model) {
         model.addAttribute("article", new Article());
-//        model.addAttribute("authors", authorDao.findAll());
-//        model.addAttribute("categories", categoryDao.findAll());
 
         return "addArticle";
     }
@@ -57,20 +56,19 @@ public class ArticleController {
         if (result.hasErrors()) {
             return "addArticle";
         }
-        articleDao.save(article);
+        articleRepository.save(article);
         return "redirect:/article/list";
     }
 
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        Article byId = articleDao.findById(id);
-        articleDao.delete(byId);
+        articleRepository.deleteById(id);
         return "redirect:/article/list";
     }
 
     @GetMapping("/edit/{id}")
     public String update(@PathVariable Long id, Model model) {
-        Article byId = articleDao.findById(id);
+        Optional<Article> byId = articleRepository.findById(id);
         model.addAttribute("article", byId);
         return "addArticle";
 
@@ -78,26 +76,26 @@ public class ArticleController {
 
     @PostMapping("/edit/{id}")
     public String edit(Article article) {
-        articleDao.update(article);
+        articleRepository.save(article);
         return "redirect:/article/list";
     }
 
 
     @ModelAttribute("authors")
     public List<Author> authors() {
-        return authorDao.findAll();
+        return authorRepository.findAll();
 
     }
 
     @ModelAttribute("categories")
     public List<Category> categories() {
-        return categoryDao.findAll();
+        return categoryRepository.findAll();
 
     }
 
     @GetMapping("/{categoryName}")
     public String showArticleByCategory(@PathVariable String categoryName, Model model) {
-        model.addAttribute("articlesByCategory",articleRepository.findAllByCategoriesName(categoryName));
+        model.addAttribute("articlesByCategory", articleRepository.findAllByCategoriesName(categoryName));
         return "articlesListByCategory";
     }
 }
