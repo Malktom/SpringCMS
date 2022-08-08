@@ -10,6 +10,7 @@
     <form:hidden path="id"/>
     name:
     <form:input path="name"/>
+    <form:errors path="name" cssClass="error-class"/>
     description:
     <form:input path="description"/>
 

@@ -8,10 +8,13 @@
 <body>
 <form:form method="post" modelAttribute="author">
     <form:hidden path="id"/>
-    name:
+    firstName:
     <form:input path="firstName"/>
-    description:
+    <form:errors path="firstName" cssClass="error-class"/>
+  lastName:
     <form:input path="lastName"/>
+    <form:errors path="lastName" cssClass="error-class"/>
+
 
     <input type="submit" value="submit">
 

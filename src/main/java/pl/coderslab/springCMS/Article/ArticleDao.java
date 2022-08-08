@@ -3,6 +3,7 @@ package pl.coderslab.springCMS.Article;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.springCMS.Author.Author;
+import pl.coderslab.springCMS.Category.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,8 +17,11 @@ public class ArticleDao {
 
     public List<Article> findAll() {
         return entityManager.createQuery("select d from Article d ").getResultList();
-
     }
+        public List<String> getCategoriesNames() {
+            return entityManager.createQuery("select d.name from Category d").getResultList();
+        }
+
 
     public List<Article> get5LatestArticles() {
 

@@ -2,8 +2,11 @@ package pl.coderslab.springCMS.Author;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.springCMS.Category.Category;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("author")
@@ -30,7 +33,10 @@ public class AuthorController {
     }
 
     @PostMapping("add")
-    public String save(Author author) { // dodac @RequestBody dla JSON
+    public String save(@Valid Author author, BindingResult result) { // dodac @RequestBody dla JSON
+        if (result.hasErrors()) {
+            return "addAuthor";
+        }
         authorDao.save(author);
         return "redirect:/author/list";
     }
