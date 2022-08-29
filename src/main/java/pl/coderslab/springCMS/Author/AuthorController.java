@@ -4,23 +4,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.springCMS.Category.Category;
+import pl.coderslab.springCMS.repository.AuthorRepository;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("author")
 public class AuthorController {
 
-    private AuthorDao authorDao;
+    //    private AuthorDao authorDao;
+    private AuthorRepository authorRepository;
 
-    public AuthorController(AuthorDao authorDao) {
-        this.authorDao = authorDao;
+    public AuthorController(AuthorDao authorDao, AuthorRepository authorRepository) {
+//        this.authorDao = authorDao;
+        this.authorRepository = authorRepository;
     }
 
     @GetMapping("list")
     public String getList(Model model) {
-        model.addAttribute("authors", authorDao.findAll());
+        model.addAttribute("authors", authorRepository.findAll());
         return "authorsList";
 
     }
@@ -37,20 +40,20 @@ public class AuthorController {
         if (result.hasErrors()) {
             return "addAuthor";
         }
-        authorDao.save(author);
+        authorRepository.save(author);
         return "redirect:/author/list";
     }
 
     @RequestMapping("/delete/{id}")
     public String deletePerson(@PathVariable Long id) {
-        Author byId = authorDao.findById(id);
-        authorDao.delete(byId);
+//        Optional<Author> byId = authorRepository.findById(id);
+        authorRepository.deleteById(id);
         return "redirect:/author/list";
     }
 
     @GetMapping("/edit/{id}")
     public String updatePerson(@PathVariable Long id, Model model) {
-        Author byId = authorDao.findById(id);
+        Optional<Author> byId = authorRepository.findById(id);
         model.addAttribute("author", byId);
         return "addAuthor";
 
@@ -58,7 +61,7 @@ public class AuthorController {
 
     @PostMapping("/edit/{id}")   // {id}?????
     public String edit(Author author) {
-        authorDao.update(author);
+        authorRepository.save(author);
         return "redirect:/author/list";
     }
 

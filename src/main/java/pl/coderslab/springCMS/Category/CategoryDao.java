@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -30,7 +31,7 @@ public class CategoryDao {
         entityManager.merge(category);
     }
 
-    public void delete(Category category) {
+    public void delete(Optional<Category> category) {
         entityManager.remove(entityManager.contains(category) ?
                 category : entityManager.merge(category));
     }
